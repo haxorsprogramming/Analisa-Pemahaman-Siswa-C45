@@ -1,0 +1,59 @@
+{% extends "layout/base.html" %}
+
+{% block contents %}
+    <div class="row" id="divDataMentor">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Data Latih</div>
+                <div class="card-body">
+                    <table id="tblDataSiswa" class="table table-bordered table-hover table-striped" style="width:100%;font-size: smaller;">
+                        <thead style="border-top: 1px solid #d0d0d0;">
+                            <tr>
+                                <th>#</th>
+                                <th>Alternatif</th>
+                                <th>Penyampaian Materi</th>
+                                <th>Media Pembelajaran</th>
+                                <th>Suasana Belajar</th>
+                                <th>Tugas</th>
+                                <th>Kehadiran</th>
+                                <th>Praktikum</th>
+                                <th>UTS</th>
+                                <th>UAS</th>
+                                <th>Matematika</th>
+                                <th>B. Indonesia</th>
+                                <th>B. Inggris</th>
+                                <th>Pemahaman</th>    
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for siswa in dataLatih %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ siswa.namaAlternatif }}</td>
+                                <td>{{ siswa.penyampaian_materi }}</td>
+                                <td>{{ siswa.media_pembelajaran }}</td>
+                                <td>{{ siswa.suasana_belajar }}</td>
+                                <td>{{ siswa.tugas }}</td>
+                                <td>{{ siswa.kehadiran }}</td>
+                                <td>{{ siswa.praktikum }}</td>
+                                <td>{{ siswa.uts }}</td>
+                                <td>{{ siswa.uas }}</td>
+                                <td>{{ siswa.matematika }}</td>
+                                <td>{{ siswa.bindo }}</td>
+                                <td>{{ siswa.bing }}</td>
+                                <td><b>{{ siswa.pemahaman }}</b></td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+<script>
+    $("#tblDataSiswa").dataTable();
+</script>
+{% endblock contents %}

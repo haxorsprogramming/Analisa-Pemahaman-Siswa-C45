@@ -1,1 +1,37 @@
 {% extends "layout/base.html" %}
+
+{% block contents %}
+    <div class="row" id="divDataMentor">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Data Siswa</div>
+                <div class="card-body">
+                    <table id="tblDataSiswa" class="table table-bordered table-hover table-striped" style="width:100%">
+                        <thead style="border-top: 1px solid #d0d0d0;">
+                            <tr>
+                                <th>#</th>
+                                <th>Kd Siswa</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for siswa in dataSiswa %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ siswa.kdAlternatif|slice:"0:5" }}</td>
+                                <td>{{ siswa.namaAlternatif }}</td>
+                                <td>{{ siswa.kelas }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+<script>
+    $("#tblDataSiswa").dataTable();
+</script>
+{% endblock contents %}

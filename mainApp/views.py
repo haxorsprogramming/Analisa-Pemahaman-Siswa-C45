@@ -14,7 +14,21 @@ def homePage(request):
     return render(request, 'home.html')
 
 def dataSiswa(request):
-    return render(request, 'data-siswa.html')
+    ds = dataLatih.objects.all()
+    context = {
+        'dataSiswa' : ds
+    }
+    return render(request, 'data-siswa.html', context)
+
+def dataLatihPage(request):
+    ds = dataLatih.objects.all()
+    context = {
+        'dataLatih' : ds
+    }
+    return render(request, 'data-latih.html', context)
+
+def prediksiPage(request):
+    return render(request, 'prediksi.html')
 
 def importDataSiswa(request):
     fileExcel = pd.read_excel('ladun/file_import/DATA_SISWA.xlsx')
@@ -387,7 +401,7 @@ def olahData(request):
     }
 
     # return JsonResponse(context, safe=False)
-    return render(request, 'chart.html', context)
+    return render(request, 'prediksi.html', context)
 
 def chartTree(request):
     return render(request, 'chart.html')

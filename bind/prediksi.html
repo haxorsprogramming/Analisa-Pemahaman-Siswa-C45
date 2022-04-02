@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+
+{% block contents %}
+<div class="row" id="divDataMentor">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Hasil Prediksi</div>
+            <div class="card-body">
+                {% include "prediksi/pemahaman.html" %}
+                <hr/>
+                {% include "prediksi/penyampaian_materi.html" %}
+                <hr/>
+                {% include "prediksi/media_pembelajaran.html" %}
+                <hr/>
+                {% include "prediksi/suasana_belajar.html" %}
+                <hr/>
+                {% include "prediksi/tugas.html" %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $("#tblPemahaman").dataTable();
+</script>
+
+{% endblock contents %}
