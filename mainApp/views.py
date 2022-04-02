@@ -208,6 +208,45 @@ def olahData(request):
     pk['kurang']['tinggi'] = setQ('Kurang', 'praktikum', 'tinggi')
     pk['kurang']['rendah'] = setQ('Kurang', 'praktikum', 'rendah')
     pk['kurang']['entropy'] = cse(pk['kurang']['tinggi'], totalRecord) + cse(pk['kurang']['rendah'], totalRecord)
+    pk['gain'] = dp['entropy'] - (((pk['baik']['tinggi'] + pk['baik']['rendah']) / totalRecord) * pk['baik']['entropy'])\
+        - (((pk['sangat_baik']['tinggi'] + pk['sangat_baik']['rendah']) / totalRecord) * pk['sangat_baik']['entropy'])\
+            - (((pk['cukup']['tinggi'] + pk['cukup']['rendah']) / totalRecord) * pk['cukup']['entropy'])\
+                - (((pk['kurang']['tinggi'] + pk['kurang']['rendah']) / totalRecord) * pk['kurang']['entropy'])
+
+    # uts 
+    uts = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+    uts['baik']['tinggi'] = setQ('Baik', 'uts', 'tinggi')
+    uts['baik']['rendah'] = setQ('Baik', 'uts', 'rendah')
+    uts['baik']['entropy'] = cse(uts['baik']['tinggi'], totalRecord) + cse(uts['baik']['rendah'], totalRecord)
+    uts['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'uts', 'tinggi')
+    uts['sangat_baik']['rendah'] = setQ('Sangat Baik', 'uts', 'rendah')
+    uts['sangat_baik']['entropy'] = cse(uts['sangat_baik']['tinggi'], totalRecord) + cse(uts['sangat_baik']['rendah'], totalRecord)
+    uts['cukup']['tinggi'] = setQ('Cukup', 'uts', 'tinggi')
+    uts['cukup']['rendah'] = setQ('Cukup', 'uts', 'rendah')
+    uts['cukup']['entropy'] = cse(uts['cukup']['tinggi'], totalRecord) + cse(uts['cukup']['rendah'], totalRecord)
+    uts['kurang']['tinggi'] = setQ('Kurang', 'uts', 'tinggi')
+    uts['kurang']['rendah'] = setQ('Kurang', 'uts', 'rendah')
+    uts['kurang']['entropy'] = cse(uts['kurang']['tinggi'], totalRecord) + cse(uts['kurang']['rendah'], totalRecord)
+    uts['gain'] = dp['entropy'] - (((uts['baik']['tinggi'] + uts['baik']['rendah']) / totalRecord) * uts['baik']['entropy'])\
+        - (((uts['sangat_baik']['tinggi'] + uts['sangat_baik']['rendah']) / totalRecord) * uts['sangat_baik']['entropy'])\
+            - (((uts['cukup']['tinggi'] + uts['cukup']['rendah']) / totalRecord) * uts['cukup']['entropy'])\
+                - (((uts['kurang']['tinggi'] + uts['kurang']['rendah']) / totalRecord) * uts['kurang']['entropy'])
+
+    # uas 
+    uas = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+
 
     context = {
         'dataPemahaman' : dp,
@@ -216,7 +255,9 @@ def olahData(request):
         'suasanaBelajar' : sb,
         'tugas' : tg,
         'kehadiran' : kh,
-        'praktikum' : pk
+        'praktikum' : pk,
+        'uts' : uts,
+        'uas' : uas
     }
     return JsonResponse(context, safe=False)
 

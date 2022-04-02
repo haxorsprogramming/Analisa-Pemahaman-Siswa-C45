@@ -38,3 +38,9 @@ def setQ(vk, kriteria, p):
             return dl.objects.filter(praktikum=vk).filter(pemahaman='Tinggi').count()
         if p == 'rendah':
             return dl.objects.filter(praktikum=vk).filter(pemahaman='Rendah').count()
+    # uts 
+    if kriteria == 'uts':
+        if p == 'tinggi':
+            return dl.objects.filter(uts=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(uts=vk).filter(pemahaman='Rendah').count()
