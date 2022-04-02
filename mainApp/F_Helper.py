@@ -44,3 +44,27 @@ def setQ(vk, kriteria, p):
             return dl.objects.filter(uts=vk).filter(pemahaman='Tinggi').count()
         if p == 'rendah':
             return dl.objects.filter(uts=vk).filter(pemahaman='Rendah').count()
+    # uas 
+    if kriteria == 'uas':
+        if p == 'tinggi':
+            return dl.objects.filter(uas=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(uas=vk).filter(pemahaman='Rendah').count()
+    # matematika 
+    if kriteria == 'matematika':
+        if p == 'tinggi':
+            return dl.objects.filter(matematika=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(matematika=vk).filter(pemahaman='Rendah').count()
+    # bahasa indonesia 
+    if kriteria == 'bindo':
+        if p == 'tinggi':
+            return dl.objects.filter(bindo=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(bindo=vk).filter(pemahaman='Rendah').count()
+    # bahasa inggris 
+    if kriteria == 'bing':
+        if p == 'tinggi':
+            return dl.objects.filter(bing=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(bing=vk).filter(pemahaman='Rendah').count()

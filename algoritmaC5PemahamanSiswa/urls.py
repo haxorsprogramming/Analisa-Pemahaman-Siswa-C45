@@ -8,5 +8,6 @@ urlpatterns = [
     path('', mainApp.homePage),
     path('import-data-siswa', mainApp.importDataSiswa),
     path('import-data-latih', mainApp.importDataLatih),
-    path('olah-data', mainApp.olahData)
+    path('olah-data', mainApp.olahData),
+    path('chart-tree', mainApp.chartTree)
 ]

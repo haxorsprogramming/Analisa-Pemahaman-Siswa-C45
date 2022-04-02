@@ -41,3 +41,9 @@ class dataLatih(models.Model):
     pemahaman = models.CharField(max_length=100)
     class Meta:
         db_table = "tbl_data_latih"
+
+class nilaiGain(models.Model):
+    namaGain = models.CharField(max_length=80)
+    nilaiGain = models.FloatField(max_length=40)
+    class Meta:
+        db_table = "tbl_nilai_gain"

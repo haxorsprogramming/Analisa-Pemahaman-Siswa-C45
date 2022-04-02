@@ -6,6 +6,7 @@ import uuid
 from math import log
 from .models import dataSiswa as dataSiswaTbl
 from .models import dataLatih as dataLatih
+from .models import nilaiGain as nilaiGain
 from .F_Helper import setQ
 
 # Create your views here.
@@ -246,7 +247,125 @@ def olahData(request):
         'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
         'gain': 0
     }
+    uas['baik']['tinggi'] = setQ('Baik', 'uas', 'tinggi')
+    uas['baik']['rendah'] = setQ('Baik', 'uas', 'rendah')
+    uas['baik']['entropy'] = cse(uas['baik']['tinggi'], totalRecord) + cse(uas['baik']['rendah'], totalRecord)
+    uas['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'uas', 'tinggi')
+    uas['sangat_baik']['rendah'] = setQ('Sangat Baik', 'uas', 'rendah')
+    uas['sangat_baik']['entropy'] = cse(uas['sangat_baik']['tinggi'], totalRecord) + cse(uas['sangat_baik']['rendah'], totalRecord)
+    uas['cukup']['tinggi'] = setQ('Cukup', 'uas', 'tinggi')
+    uas['cukup']['rendah'] = setQ('Cukup', 'uas', 'rendah')
+    uas['cukup']['entropy'] = cse(uas['cukup']['tinggi'], totalRecord) + cse(uas['cukup']['rendah'], totalRecord)
+    uas['kurang']['tinggi'] = setQ('Kurang', 'uas', 'tinggi')
+    uas['kurang']['rendah'] = setQ('Kurang', 'uas', 'rendah')
+    uas['kurang']['entropy'] = cse(uas['kurang']['tinggi'], totalRecord) + cse(uas['kurang']['rendah'], totalRecord)
+    uas['gain'] = dp['entropy'] - (((uas['baik']['tinggi'] + uas['baik']['rendah']) / totalRecord) * uas['baik']['entropy'])\
+        - (((uas['sangat_baik']['tinggi'] + uas['sangat_baik']['rendah']) / totalRecord) * uas['sangat_baik']['entropy'])\
+            - (((uas['cukup']['tinggi'] + uas['cukup']['rendah']) / totalRecord) * uas['cukup']['entropy'])\
+                - (((uas['kurang']['tinggi'] + uas['kurang']['rendah']) / totalRecord) * uas['kurang']['entropy'])
 
+    # matematika 
+    mat = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+    mat['baik']['tinggi'] = setQ('Baik', 'matematika', 'tinggi')
+    mat['baik']['rendah'] = setQ('Baik', 'matematika', 'rendah')
+    mat['baik']['entropy'] = cse(mat['baik']['tinggi'], totalRecord) + cse(mat['baik']['rendah'], totalRecord)
+    mat['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'matematika', 'tinggi')
+    mat['sangat_baik']['rendah'] = setQ('Sangat Baik', 'matematika', 'rendah')
+    mat['sangat_baik']['entropy'] = cse(mat['sangat_baik']['tinggi'], totalRecord) + cse(mat['sangat_baik']['rendah'], totalRecord)
+    mat['cukup']['tinggi'] = setQ('Cukup', 'matematika', 'tinggi')
+    mat['cukup']['rendah'] = setQ('Cukup', 'matematika', 'rendah')
+    mat['cukup']['entropy'] = cse(mat['cukup']['tinggi'], totalRecord) + cse(mat['cukup']['rendah'], totalRecord)
+    mat['kurang']['tinggi'] = setQ('Kurang', 'matematika', 'tinggi')
+    mat['kurang']['rendah'] = setQ('Kurang', 'matematika', 'rendah')
+    mat['kurang']['entropy'] = cse(mat['kurang']['tinggi'], totalRecord) + cse(mat['kurang']['rendah'], totalRecord)
+    mat['gain'] = dp['entropy'] - (((mat['baik']['tinggi'] + mat['baik']['rendah']) / totalRecord) * mat['baik']['entropy'])\
+        - (((mat['sangat_baik']['tinggi'] + mat['sangat_baik']['rendah']) / totalRecord) * mat['sangat_baik']['entropy'])\
+            - (((mat['cukup']['tinggi'] + mat['cukup']['rendah']) / totalRecord) * mat['cukup']['entropy'])\
+                - (((mat['kurang']['tinggi'] + mat['kurang']['rendah']) / totalRecord) * mat['kurang']['entropy'])
+
+    # bahasa indonesia 
+    bindo = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+    bindo['baik']['tinggi'] = setQ('Baik', 'bindo', 'tinggi')
+    bindo['baik']['rendah'] = setQ('Baik', 'bindo', 'rendah')
+    bindo['baik']['entropy'] = cse(bindo['baik']['tinggi'], totalRecord) + cse(bindo['baik']['rendah'], totalRecord)
+    bindo['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'bindo', 'tinggi')
+    bindo['sangat_baik']['rendah'] = setQ('Sangat Baik', 'bindo', 'rendah')
+    bindo['sangat_baik']['entropy'] = cse(bindo['sangat_baik']['tinggi'], totalRecord) + cse(bindo['sangat_baik']['rendah'], totalRecord)
+    bindo['cukup']['tinggi'] = setQ('Cukup', 'bindo', 'tinggi')
+    bindo['cukup']['rendah'] = setQ('Cukup', 'bindo', 'rendah')
+    bindo['cukup']['entropy'] = cse(bindo['cukup']['tinggi'], totalRecord) + cse(bindo['cukup']['rendah'], totalRecord)
+    bindo['kurang']['tinggi'] = setQ('Kurang', 'bindo', 'tinggi')
+    bindo['kurang']['rendah'] = setQ('Kurang', 'bindo', 'rendah')
+    bindo['kurang']['entropy'] = cse(bindo['kurang']['tinggi'], totalRecord) + cse(bindo['kurang']['rendah'], totalRecord)
+    bindo['gain'] = dp['entropy'] - (((bindo['baik']['tinggi'] + bindo['baik']['rendah']) / totalRecord) * bindo['baik']['entropy'])\
+        - (((bindo['sangat_baik']['tinggi'] + bindo['sangat_baik']['rendah']) / totalRecord) * bindo['sangat_baik']['entropy'])\
+            - (((bindo['cukup']['tinggi'] + bindo['cukup']['rendah']) / totalRecord) * bindo['cukup']['entropy'])\
+                - (((bindo['kurang']['tinggi'] + bindo['kurang']['rendah']) / totalRecord) * bindo['kurang']['entropy'])
+
+    # bahasa inggris 
+    bing = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+    bing['baik']['tinggi'] = setQ('Baik', 'bing', 'tinggi')
+    bing['baik']['rendah'] = setQ('Baik', 'bing', 'rendah')
+    bing['baik']['entropy'] = cse(bing['baik']['tinggi'], totalRecord) + cse(bing['baik']['rendah'], totalRecord)
+    bing['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'bing', 'tinggi')
+    bing['sangat_baik']['rendah'] = setQ('Sangat Baik', 'bing', 'rendah')
+    bing['sangat_baik']['entropy'] = cse(bing['sangat_baik']['tinggi'], totalRecord) + cse(bing['sangat_baik']['rendah'], totalRecord)
+    bing['cukup']['tinggi'] = setQ('Cukup', 'bing', 'tinggi')
+    bing['cukup']['rendah'] = setQ('Cukup', 'bing', 'rendah')
+    bing['cukup']['entropy'] = cse(bing['cukup']['tinggi'], totalRecord) + cse(bing['cukup']['rendah'], totalRecord)
+    bing['kurang']['tinggi'] = setQ('Kurang', 'bing', 'tinggi')
+    bing['kurang']['rendah'] = setQ('Kurang', 'bing', 'rendah')
+    bing['kurang']['entropy'] = cse(bing['kurang']['tinggi'], totalRecord) + cse(bing['kurang']['rendah'], totalRecord)
+    bing['gain'] = dp['entropy'] - (((bing['baik']['tinggi'] + bing['baik']['rendah']) / totalRecord) * bing['baik']['entropy'])\
+        - (((bing['sangat_baik']['tinggi'] + bing['sangat_baik']['rendah']) / totalRecord) * bing['sangat_baik']['entropy'])\
+            - (((bing['cukup']['tinggi'] + bing['cukup']['rendah']) / totalRecord) * bing['cukup']['entropy'])\
+                - (((bing['kurang']['tinggi'] + bing['kurang']['rendah']) / totalRecord) * bing['kurang']['entropy'])
+
+
+    # simpan nilai gain 
+    nilaiGain.objects.all().delete()
+    nilaiGain.objects.create(namaGain='penyampaian_materi', nilaiGain=pm['gain'])
+    nilaiGain.objects.create(namaGain='media_pembelajaran', nilaiGain=mp['gain'])
+    nilaiGain.objects.create(namaGain='suasana_belajar', nilaiGain=sb['gain'])
+    nilaiGain.objects.create(namaGain='tugas', nilaiGain=tg['gain'])
+    nilaiGain.objects.create(namaGain='kehadiran', nilaiGain=kh['gain'])
+    nilaiGain.objects.create(namaGain='praktikum', nilaiGain=pk['gain'])
+    nilaiGain.objects.create(namaGain='uts', nilaiGain=uts['gain'])
+    nilaiGain.objects.create(namaGain='uas', nilaiGain=uas['gain'])
+    nilaiGain.objects.create(namaGain='matematika', nilaiGain=mat['gain'])
+    nilaiGain.objects.create(namaGain='bindo', nilaiGain=bindo['gain'])
+    nilaiGain.objects.create(namaGain='bing', nilaiGain=bing['gain'])
+
+    # ambil nilai gain 
+    dg = nilaiGain.objects.all().order_by('-nilaiGain')
+
+    dGain = []
+    ordGain = 1
+    for x in dg:
+        lsd = {'nama':'', 'nilai':0, 'ranking':0}
+        lsd['nama'] = x.namaGain
+        lsd['nilai'] = x.nilaiGain
+        lsd['ranking'] = ordGain
+        ordGain += 1
+        dGain.append(lsd)
 
     context = {
         'dataPemahaman' : dp,
@@ -257,9 +376,18 @@ def olahData(request):
         'kehadiran' : kh,
         'praktikum' : pk,
         'uts' : uts,
-        'uas' : uas
+        'uas' : uas,
+        'matematika' : mat,
+        'bindo' : bindo,
+        'bing' : bing,
+        'dGain' : dGain
     }
-    return JsonResponse(context, safe=False)
+
+    # return JsonResponse(context, safe=False)
+    return render(request, 'chart.html', context)
+
+def chartTree(request):
+    return render(request, 'chart.html')
 
 def getTotalValue(vk, kriteria, p):
     dl = dataLatih
@@ -268,8 +396,6 @@ def getTotalValue(vk, kriteria, p):
             return dl.objects.filter(kehadiran=vk).filter(pemahaman='Tinggi').count()
         if p == 'rendah':
             return dl.objects.filter(kehadiran=vk).filter(pemahaman='Rendah').count()
-
-
 
 
 def cse(nKriteria, totalData):
