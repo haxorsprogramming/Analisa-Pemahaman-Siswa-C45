@@ -6,6 +6,7 @@ import uuid
 from math import log
 from .models import dataSiswa as dataSiswaTbl
 from .models import dataLatih as dataLatih
+from .F_Helper import setQ
 
 # Create your views here.
 def homePage(request):
@@ -83,17 +84,17 @@ def olahData(request):
         'membosankan' : {'tinggi': 0, 'rendah' : 0, 'entropy':0},
         'gain' : 0
     }
-    pm['serius']['tinggi'] = dl.objects.filter(penyampaian_materi='Serius').filter(pemahaman='Tinggi').count()
-    pm['serius']['rendah'] = dl.objects.filter(penyampaian_materi='Serius').filter(pemahaman='Rendah').count()
+    pm['serius']['tinggi'] = setQ('Serius','penyampaian_materi','tinggi')
+    pm['serius']['rendah'] = setQ('Serius','penyampaian_materi','rendah')
     pm['serius']['entropy'] = cse(pm['serius']['tinggi'], totalRecord) + cse(pm['serius']['rendah'], totalRecord)
-    pm['santai']['tinggi'] = dl.objects.filter(penyampaian_materi='Santai').filter(pemahaman='Tinggi').count()
-    pm['santai']['rendah'] = dl.objects.filter(penyampaian_materi='Santai').filter(pemahaman='Rendah').count()
+    pm['santai']['tinggi'] = setQ('Santai','penyampaian_materi','tinggi')
+    pm['santai']['rendah'] = setQ('Santai','penyampaian_materi','rendah')
     pm['santai']['entropy'] = cse(pm['santai']['tinggi'], totalRecord) + cse(pm['santai']['rendah'], totalRecord)
-    pm['serius_santai']['tinggi'] = dl.objects.filter(penyampaian_materi='Serius Santai').filter(pemahaman='Tinggi').count()
-    pm['serius_santai']['rendah'] = dl.objects.filter(penyampaian_materi='Serius Santai').filter(pemahaman='Rendah').count()
+    pm['serius_santai']['tinggi'] = setQ('Serius Santai','penyampaian_materi','tinggi')
+    pm['serius_santai']['rendah'] = setQ('Serius Santai','penyampaian_materi','rendah')
     pm['serius_santai']['entropy'] = cse(pm['serius_santai']['tinggi'], totalRecord) + cse(pm['serius_santai']['rendah'], totalRecord)
-    pm['membosankan']['tinggi'] = dl.objects.filter(penyampaian_materi='Membosankan').filter(pemahaman='Tinggi').count()
-    pm['membosankan']['rendah'] = dl.objects.filter(penyampaian_materi='Membosankan').filter(pemahaman='Rendah').count()
+    pm['membosankan']['tinggi'] = setQ('Membosankan','penyampaian_materi','tinggi')
+    pm['membosankan']['rendah'] = setQ('Membosankan','penyampaian_materi','rendah')
     pm['membosankan']['entropy'] = cse(pm['membosankan']['tinggi'], totalRecord) + cse(pm['membosankan']['rendah'], totalRecord)
     pm['gain'] = dp['entropy']-(((pm['membosankan']['tinggi'] + pm['membosankan']['rendah']) / totalRecord) * pm['membosankan']['entropy']) \
         - (((pm['serius_santai']['tinggi'] + pm['serius_santai']['rendah']) / totalRecord) * pm['serius_santai']['entropy']) \
@@ -108,17 +109,17 @@ def olahData(request):
         'ebook' :  {'tinggi':0, 'rendah':0, 'entropy':0},
         'gain' : 0
     }
-    mp['pdf']['tinggi'] = dl.objects.filter(media_pembelajaran='PDF').filter(pemahaman='Tinggi').count()
-    mp['pdf']['rendah'] = dl.objects.filter(media_pembelajaran='PDF').filter(pemahaman='Rendah').count()
+    mp['pdf']['tinggi'] = setQ('PDF','media_pembelajaran','tinggi')
+    mp['pdf']['rendah'] = setQ('PDF','media_pembelajaran','rendah')
     mp['pdf']['entropy'] = cse(mp['pdf']['tinggi'], totalRecord) + cse(mp['pdf']['rendah'], totalRecord)
-    mp['video']['tinggi'] = dl.objects.filter(media_pembelajaran='Video').filter(pemahaman='Tinggi').count()
-    mp['video']['rendah'] = dl.objects.filter(media_pembelajaran='Video').filter(pemahaman='Rendah').count()
+    mp['video']['tinggi'] = setQ('Video','media_pembelajaran','tinggi')
+    mp['video']['rendah'] = setQ('Video','media_pembelajaran','rendah')
     mp['video']['entropy'] = cse(mp['video']['tinggi'], totalRecord) + cse(mp['video']['rendah'], totalRecord)
-    mp['ppt']['tinggi'] = dl.objects.filter(media_pembelajaran='PPT').filter(pemahaman='Tinggi').count()
-    mp['ppt']['rendah'] = dl.objects.filter(media_pembelajaran='PPT').filter(pemahaman='Rendah').count()
+    mp['ppt']['tinggi'] = setQ('PPT','media_pembelajaran','tinggi')
+    mp['ppt']['rendah'] = setQ('PPT','media_pembelajaran','rendah')
     mp['ppt']['entropy'] = cse(mp['ppt']['tinggi'], totalRecord) + cse(mp['ppt']['rendah'], totalRecord)
-    mp['ebook']['tinggi'] = dl.objects.filter(media_pembelajaran='EBOOK').filter(pemahaman='Tinggi').count()
-    mp['ebook']['rendah'] = dl.objects.filter(media_pembelajaran='EBOOK').filter(pemahaman='Rendah').count()
+    mp['ebook']['tinggi'] = setQ('EBOOK','media_pembelajaran','tinggi')
+    mp['ebook']['rendah'] = setQ('EBOOK','media_pembelajaran','rendah')
     mp['ebook']['entropy'] = cse(mp['ebook']['tinggi'], totalRecord) + cse(mp['ebook']['rendah'], totalRecord)
     mp['gain'] = dp['entropy']-(((mp['pdf']['tinggi'] + mp['pdf']['rendah']) / totalRecord) * mp['pdf']['entropy']) \
         - (((mp['video']['tinggi'] + mp['video']['rendah']) / totalRecord) * mp['video']['entropy']) \
@@ -132,22 +133,102 @@ def olahData(request):
         'tidak_mendukung' : {'tinggi':0, 'rendah':0, 'entropy':0},
         'gain' : 0
     }
-    sb['mendukung']['tinggi'] = dl.objects.filter(suasana_belajar='Mendukung').filter(pemahaman='Tinggi').count()
-    sb['mendukung']['rendah'] = dl.objects.filter(suasana_belajar='Mendukung').filter(pemahaman='Rendah').count()
+    sb['mendukung']['tinggi'] = setQ('Mendukung','suasana_belajar','tinggi')
+    sb['mendukung']['rendah'] = setQ('Mendukung','suasana_belajar','rendah')
     sb['mendukung']['entropy'] = cse(sb['mendukung']['tinggi'], totalRecord) + cse(sb['mendukung']['rendah'], totalRecord)
-    sb['tidak_mendukung']['tinggi'] = dl.objects.filter(suasana_belajar='Tidak Mendukung').filter(pemahaman='Tinggi').count()
-    sb['tidak_mendukung']['rendah'] = dl.objects.filter(suasana_belajar='Tidak Mendukung').filter(pemahaman='Rendah').count()
+    sb['tidak_mendukung']['tinggi'] = setQ('Tidak Mendukung','suasana_belajar','tinggi')
+    sb['tidak_mendukung']['rendah'] = setQ('Tidak Mendukung','suasana_belajar','rendah')
     sb['tidak_mendukung']['entropy'] = cse(sb['tidak_mendukung']['tinggi'], totalRecord) + cse(sb['tidak_mendukung']['rendah'], totalRecord)
     sb['gain'] = dp['entropy'] - (((sb['mendukung']['tinggi'] + sb['mendukung']['rendah']) / totalRecord) * sb['mendukung']['entropy'])\
         - (((sb['tidak_mendukung']['tinggi'] + sb['tidak_mendukung']['rendah']) / totalRecord) * sb['tidak_mendukung']['entropy'])
+
+    # tugas 
+    tg = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain': 0
+    }
+
+    tg['baik']['tinggi'] = setQ('Baik','tugas','tinggi')
+    tg['baik']['rendah'] = setQ('Baik','tugas','rendah')
+    tg['baik']['entropy'] = cse(tg['baik']['tinggi'], totalRecord) + cse(tg['baik']['rendah'], totalRecord)
+    tg['cukup']['tinggi'] = setQ('Cukup','tugas','tinggi')
+    tg['cukup']['rendah'] = setQ('Cukup','tugas','rendah')
+    tg['cukup']['entropy'] = cse(tg['cukup']['tinggi'], totalRecord) + cse(tg['cukup']['rendah'], totalRecord)
+    tg['sangat_baik']['tinggi'] = setQ('Sangat Baik','tugas','tinggi')
+    tg['sangat_baik']['rendah'] = setQ('Sangat Baik','tugas','rendah')
+    tg['sangat_baik']['entropy'] = cse(tg['sangat_baik']['tinggi'], totalRecord) + cse(tg['sangat_baik']['rendah'], totalRecord)
+    tg['kurang']['tinggi'] = setQ('Kurang','tugas','tinggi')
+    tg['kurang']['rendah'] = setQ('Kurang','tugas','rendah')
+    tg['kurang']['entropy'] = cse(tg['kurang']['tinggi'], totalRecord) + cse(tg['kurang']['rendah'], totalRecord)
+    tg['gain'] = dp['entropy'] - (((tg['baik']['tinggi'] + tg['baik']['rendah']) / totalRecord) * tg['baik']['entropy'])\
+        - (((tg['cukup']['tinggi'] + tg['cukup']['rendah']) / totalRecord) * tg['cukup']['entropy'])\
+            - (((tg['sangat_baik']['tinggi'] + tg['sangat_baik']['rendah']) / totalRecord) * tg['sangat_baik']['entropy'])\
+                - (((tg['kurang']['tinggi'] + tg['kurang']['rendah']) / totalRecord) * tg['kurang']['entropy'])
+
+    # kehadiran 
+    kh = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain' : 0
+    }
+    kh['baik']['tinggi'] = setQ('Baik', 'kehadiran', 'tinggi')
+    kh['baik']['rendah'] = setQ('Baik', 'kehadiran', 'rendah')
+    kh['baik']['entropy'] = cse(kh['baik']['tinggi'], totalRecord) + cse(kh['baik']['rendah'], totalRecord)
+    kh['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'kehadiran', 'tinggi')
+    kh['sangat_baik']['rendah'] = setQ('Sangat Baik', 'kehadiran', 'rendah')
+    kh['sangat_baik']['entropy'] = cse(kh['sangat_baik']['tinggi'], totalRecord) + cse(kh['sangat_baik']['rendah'], totalRecord)
+    kh['cukup']['tinggi'] = setQ('Cukup', 'kehadiran', 'tinggi')
+    kh['cukup']['rendah'] = setQ('Cukup', 'kehadiran', 'rendah')
+    kh['cukup']['entropy'] = cse(kh['cukup']['tinggi'], totalRecord) + cse(kh['cukup']['rendah'], totalRecord)
+    kh['gain'] = dp['entropy'] - (((kh['baik']['tinggi'] + kh['baik']['rendah']) / totalRecord) * kh['baik']['entropy'])\
+        - (((kh['sangat_baik']['tinggi'] + kh['sangat_baik']['rendah']) / totalRecord) * kh['sangat_baik']['entropy'])\
+            - (((kh['cukup']['tinggi'] + kh['cukup']['rendah']) / totalRecord) * kh['cukup']['entropy'])
+
+    # praktikum 
+    pk = {
+        'baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'sangat_baik' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'cukup' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'kurang' : {'tinggi':0, 'rendah':0, 'entropy':0},
+        'gain' : 0
+    }
+    pk['baik']['tinggi'] = setQ('Baik', 'praktikum', 'tinggi')
+    pk['baik']['rendah'] = setQ('Baik', 'praktikum', 'rendah')
+    pk['baik']['entropy'] = cse(pk['baik']['tinggi'], totalRecord) + cse(pk['baik']['rendah'], totalRecord)
+    pk['sangat_baik']['tinggi'] = setQ('Sangat Baik', 'praktikum', 'tinggi')
+    pk['sangat_baik']['rendah'] = setQ('Sangat Baik', 'praktikum', 'rendah')
+    pk['sangat_baik']['entropy'] = cse(pk['sangat_baik']['tinggi'], totalRecord) + cse(pk['sangat_baik']['rendah'], totalRecord)
+    pk['cukup']['tinggi'] = setQ('Cukup', 'praktikum', 'tinggi')
+    pk['cukup']['rendah'] = setQ('Cukup', 'praktikum', 'rendah')
+    pk['cukup']['entropy'] = cse(pk['cukup']['tinggi'], totalRecord) + cse(pk['cukup']['rendah'], totalRecord)
+    pk['kurang']['tinggi'] = setQ('Kurang', 'praktikum', 'tinggi')
+    pk['kurang']['rendah'] = setQ('Kurang', 'praktikum', 'rendah')
+    pk['kurang']['entropy'] = cse(pk['kurang']['tinggi'], totalRecord) + cse(pk['kurang']['rendah'], totalRecord)
 
     context = {
         'dataPemahaman' : dp,
         'penyampaianMateri' : pm,
         'mediaPembelajaran' : mp,
-        'suasanaBelajar' : sb
+        'suasanaBelajar' : sb,
+        'tugas' : tg,
+        'kehadiran' : kh,
+        'praktikum' : pk
     }
     return JsonResponse(context, safe=False)
+
+def getTotalValue(vk, kriteria, p):
+    dl = dataLatih
+    if kriteria == 'kehadiran':
+        if p == 'tinggi':
+            return dl.objects.filter(kehadiran=vk).filter(pemahaman='Tinggi').count()
+        if p == 'rendah':
+            return dl.objects.filter(kehadiran=vk).filter(pemahaman='Rendah').count()
+
+
 
 
 def cse(nKriteria, totalData):
