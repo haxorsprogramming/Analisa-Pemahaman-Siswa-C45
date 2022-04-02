@@ -13,6 +13,9 @@ from .F_Helper import setQ
 def homePage(request):
     return render(request, 'home.html')
 
+def dataSiswa(request):
+    return render(request, 'data-siswa.html')
+
 def importDataSiswa(request):
     fileExcel = pd.read_excel('ladun/file_import/DATA_SISWA.xlsx')
     dataSiswa = fileExcel.iloc[:, 0:3]
