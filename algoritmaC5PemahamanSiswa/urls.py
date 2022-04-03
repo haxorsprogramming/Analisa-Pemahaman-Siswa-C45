@@ -12,5 +12,6 @@ urlpatterns = [
     path('chart-tree', mainApp.chartTree),
     path('data-siswa', mainApp.dataSiswa),
     path('data-latih', mainApp.dataLatihPage),
-    path('prediksi', mainApp.olahData)
+    path('prediksi', mainApp.olahData),
+    path('decision-tree', mainApp.chartTree)
 ]

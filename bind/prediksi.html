@@ -15,6 +15,24 @@
                 {% include "prediksi/suasana_belajar.html" %}
                 <hr/>
                 {% include "prediksi/tugas.html" %}
+                <hr/>
+                {% include "prediksi/kehadiran.html" %}
+                <hr />
+                {% include "prediksi/praktikum.html" %}
+                <hr />
+                {% include "prediksi/uts.html" %}
+                <hr />
+                {% include "prediksi/uas.html" %}
+                <hr />
+                {% include "prediksi/matematika.html" %}
+                <hr />
+                {% include "prediksi/bindo.html" %}
+                <hr />
+                {% include "prediksi/bing.html" %}
+                <hr />
+                {% include "prediksi/rangking_gain.html" %}
+                <hr />
+                <a href="{{ BASE_URL }}decision-tree" class="btn btn-primary">Lihat pohon keputusan</a>
             </div>
         </div>
 
@@ -22,7 +40,7 @@
 </div>
 
 <script>
-    $("#tblPemahaman").dataTable();
+    
 </script>
 
 {% endblock contents %}

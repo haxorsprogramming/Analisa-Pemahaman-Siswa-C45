@@ -1,37 +1,279 @@
-<html>
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {packages:["orgchart"]});
-      google.charts.setOnLoadCallback(drawChart);
+{% extends "layout/base.html" %} {% block contents %}
 
-      function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('string', 'Manager');
-        data.addColumn('string', 'ToolTip');
+<div class="row" id="divDataMentor">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">Pohon keputusan</div>
+      <div class="card-body">
+        <div id="tree" style="text-align: center; font-size: 13px;width: 100%;position: relative;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        // For each orgchart box, provide the name, manager, and tooltip to show.
-        data.addRows([
-            ['Praktikum', '',''],
-            
-            ['Baik, Kurang, Cukup (Praktikum)', 'Praktikum', ''],
-            ['Sangat_Baik(Praktikum)', 'Praktikum', ''],
+<script>
+  var myData = [
+    {
+      head: "Kriteria 1",
+      id: "A",
+      contents: "Praktikum",
+      children: [
+        {
+          head: "Sub Kriteria",
+          id: "A1",
+          contents: "Baik, Cukup, Kurang",
+          children: [
+            {
+              head: "Kriteria 2",
+              id: "A11",
+              contents: "Penyampaian Materi",
+              children: [
+                {
+                  head: "Sub Kriteria",
+                  id: "A111",
+                  contents: "Serius",
+                  children: [
+                    {
+                      head: "Hasil",
+                      id: "A1111",
+                      contents: "Pemahaman : <b>Tinggi</b>",
+                    },
+                  ],
+                },
+                {
+                  head: "Sub Kriteria",
+                  id: "A1112",
+                  contents: "Serius Santai, Santai, <br/>Membosankan",
+                  children: [
+                    {
+                      head: "Kriteria 3",
+                      id: "A11121",
+                      contents: "Media Pembelajaran",
+                      children: [
+                        {
+                          head: "Sub Kriteria",
+                          id: "A111211",
+                          contents: "PPT, EBOOK",
+                          children: [
+                            {
+                              head: "Hasil",
+                              id: "A1112111",
+                              contents: "Pemahaman : <b>Tinggi</b>",
+                            },
+                          ],
+                        },
+                        {
+                          head: "Sub Kriteria",
+                          id: "A111212",
+                          contents: "Video",
+                          children: [
+                            {
+                              head: "Hasil",
+                              id: "A1112121",
+                              contents: "Pemahaman : <b>Rendah</b>",
+                            },
+                          ],
+                        },
+                        {
+                          head: "Sub Kriteria",
+                          id: "A111213",
+                          contents: "PDF",
+                          children: [
+                            {
+                              head: "Kriteria 4",
+                              id: "A1112131",
+                              contents: "UAS",
+                              children: [
+                                {
+                                  head: "Sub Kriteria",
+                                  id: "A11121311",
+                                  contents: "Baik, Sangat Baik",
+                                  children: [
+                                    {
+                                      head: "Hasil",
+                                      id: "A111213111",
+                                      contents: "Pemahaman : <b>Tinggi</b>",
+                                    },
+                                  ],
+                                },
+                                {
+                                  head: "Sub Kriteria",
+                                  id: "A11121312",
+                                  contents: "Cukup, Kurang",
+                                  children: [
+                                    {
+                                      head: "Hasil",
+                                      id: "A111213121",
+                                      contents: "Pemahaman : <b>Rendah</b>",
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              head: "Kriteria 5",
+                              id: "A1112132",
+                              contents: "UTS",
+                              children: [
+                                {
+                                  head: "Sub Kriteria",
+                                  id: "A11121321",
+                                  contents: "Sangat Baik, Cukup",
+                                  children: [
+                                    {
+                                      head: "Hasil",
+                                      id: "A111213211",
+                                      contents: "Pemahaman : <b>Tinggi</b>",
+                                    },
+                                  ],
+                                },
+                                {
+                                  head: "Sub Kriteria",
+                                  id: "A11121322",
+                                  contents: "Baik",
+                                  children: [
+                                    {
+                                      head: "Kriteria 6",
+                                      id: "A111213221",
+                                      contents: "Tugas",
+                                      children: [
+                                        {
+                                          head: "Sub Kriteria",
+                                          id: "A1112132211",
+                                          contents: "Sangat Baik, Cukup, Baik",
+                                          children: [
+                                            {
+                                              head: "Kriteria 7",
+                                              id: "A11121322111",
+                                              contents: "Matematika",
+                                              children: [
+                                                {
+                                                  head: "Sub Kriteria",
+                                                  id: "A111213221111",
+                                                  contents: "Sangat Baik",
+                                                  children: [
+                                                    {
+                                                      head: "Hasil",
+                                                      id: "A1112132211111",
+                                                      contents:
+                                                        "Pemahaman : <b>Tinggi</b>",
+                                                    },
+                                                  ],
+                                                },
+                                                {
+                                                  head: "Sub Kriteria",
+                                                  id: "A111213221112",
+                                                  contents: "Cukup, Kurang",
+                                                  children: [
+                                                    {
+                                                      head: "Hasil",
+                                                      id: "A1112132211121",
+                                                      contents:
+                                                        "Pemahaman : <b>Rendah</b>",
+                                                    },
+                                                  ],
+                                                },
+                                                {
+                                                  head: "Sub Kriteria",
+                                                  id: "A111213221113",
+                                                  contents: "Baik",
+                                                  children: [
+                                                    {
+                                                      head: "Kriteria 8",
+                                                      id: "A1112132211131",
+                                                      contents:
+                                                        "Bahasa Indonesia",
+                                                      children: [
+                                                        {
+                                                          head: "Sub Kriteria",
+                                                          id: "A11121322111311",
+                                                          contents:
+                                                            "Cukup, Kurang",
+                                                          children: [
+                                                            {
+                                                              head: "Hasil",
+                                                              id: "A111213221113111",
+                                                              contents:
+                                                                "Pemahaman : <b>Rendah</b>",
+                                                            },
+                                                          ],
+                                                        },
+                                                        {
+                                                          head: "Sub Kriteria",
+                                                          id: "A11121322111312",
+                                                          contents:
+                                                            "Baik, Sangat Baik",
+                                                          children: [
+                                                            {
+                                                              head: "Kriteria 9",
+                                                              id: "A111213221113121",
+                                                              contents:
+                                                                "Bahasa Inggris",
+                                                            },
+                                                          ],
+                                                        },
+                                                      ],
+                                                    },
+                                                  ],
+                                                },
+                                              ],
+                                            },
+                                          ],
+                                        },
+                                        {
+                                          head: "Sub Kriteria",
+                                          id: "A1112132212",
+                                          contents: "Kurang",
+                                          children: [
+                                            {
+                                              head: "Hasil",
+                                              id: "A1112132211121",
+                                              contents:
+                                                "Pemahaman : <b>Rendah</b>",
+                                            },
+                                          ],
+                                        },
+                                      ],
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          head: "Sub Kriteria",
+          id: "A2",
+          contents: "Baik",
+          children: [
+            {
+              head: "Hasil",
+              id: "A-2-1",
+              contents: "Pemahaman : <b>Tinggi</b>",
+            },
+          ],
+        },
+      ],
+    },
+  ];
 
-            ['Pemahaman Tinggi', 'Sangat_Baik(Praktikum)',''],
-            ['Penyampaian Materi','Baik, Kurang, Cukup (Praktikum)', ''],
-
-            
-        ]);
-
-        // Create the chart.
-        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
-        // Draw the chart, setting the allowHtml option to true for the tooltips.
-        chart.draw(data, {'allowHtml':true});
-      }
-   </script>
-    </head>
-  <body>
-    <div id="chart_div"></div>
-  </body>
-</html>
+  $("#tree").jHTree({
+    callType: "obj",
+    structureObj: myData,
+    zoomer: true,
+    nodeDropComplete: function (event, data) {
+      //----- Do Something @ Server side or client side -----------
+      //alert("Node ID: " + data.nodeId + " Parent Node ID: " + data.parentNodeId);
+      //-----------------------------------------------------------
+    },
+  });
+</script>
+{% endblock contents %}

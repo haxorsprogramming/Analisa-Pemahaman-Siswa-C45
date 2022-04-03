@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dynamic Family Tree/Organization Chart Plugin Example</title>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="Themes/smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="CSS/jHTree.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/jQuery.jHTree.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#tree").jHTree({
+                callType: 'url',
+                url: 'data/myJsonFile.json',
+                nodeDropComplete: function (event, data) {
+                    //----- Do Something @ Server side or client side -----------
+                    //alert("Node ID: " + data.nodeId + " Parent Node ID: " + data.parentNodeId);
+                    //-----------------------------------------------------------
+                }
+            });
+            //-------------------
+            //var jsonStructureObject = [{
+            //    head: 'A',
+            //    id: 'aa',
+            //    contents: 'A Contents',
+            //    children: [
+            //        {
+            //            head: 'A-1',
+            //            id: 'a1',
+            //            contents: 'A-1 Contents',
+            //            children: [
+            //                { head: 'A-1-1', id: 'a11', contents: 'A-1-1 Contents' }
+            //            ]
+            //        },
+            //        {
+            //            head: 'A-2',
+            //            id: 'a2',
+            //            contents: 'A-2 Contents',
+            //            children: [
+            //                { head: 'A-2-1', id: 'a21', contents: 'A-2-1 Contents' },
+            //                { head: 'A-2-2', id: 'a22', contents: 'A-2-2 Contents' }
+            //            ]
+            //        }
+            //    ]
+            //}];
+            ////-----------
+            //$("#tree").jHTree({
+            //    callType: 'obj',
+            //    structureObj: jsonStructureObject
+            //});
+        });
+    </script>
+
+    <style type="text/css">
+    body { background-color: #fafafa; font-family: 'Roboto'; }
+    .container { margin: 150px auto; max-width: 960px; }
+        #themes {
+            font-size: 1.2em;
+        }
+
+        #set {
+            border: 2px solid #ddd;
+            padding: 2px;
+            background: #444;
+            width: 350px;
+            height: 30px;
+        }
+
+            #set a {
+                margin: 2px;
+                border: 1px solid #444;
+                float: left;
+            }
+
+                #set a:hover {
+                    border-color: #fff;
+                }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#themes a').click(function () {
+                var theme = $(this).attr('href');
+                $('head').append('<link href="' + theme + '" rel="Stylesheet" type="text/css" />');
+                return false;
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/chart-graph/Family-Tree-Organization-Chart-jHTree.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+    <div class="container">
+        <h1>Dynamic Family Tree/Organization Chart Plugin</h1>
+        <div id="themes">
+            <span id="changeItUp">Change Theme</span>
+            <div id="set">
+                <a href="Themes/smoothness/jquery-ui-1.10.4.custom.min.css" title="Smoothness">
+                    <img src="images/themethumbs/themenail_smoothness.png" alt="image" width="25" height="22" />
+                </a>
+                <a href="Themes/black-tie/jquery-ui-1.10.4.custom.min.css" title="blacktie">
+                    <img src="images/themethumbs/themenail_blacktie.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/south-street/jquery-ui-1.10.4.custom.min.css" title="South Street">
+                    <img src="images/themethumbs/themenail_southst.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/mint-choc/jquery-ui-1.10.4.custom.min.css" title="Mint Choco">
+                    <img src="images/themethumbs/themenail_mintchoc.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/dot-luv/jquery-ui-1.10.4.custom.min.css" title="Dot Luv">
+                    <img src="images/themethumbs/themenail_dotluv.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/humanity/jquery-ui-1.10.4.custom.min.css" title="humanity">
+                    <img src="images/themethumbs/humanity.png" alt="image" width="25" height="22" />
+                </a>
+                <a href="Themes/cupertino/jquery-ui-1.10.4.custom.min.css" title="Cupertino">
+                    <img src="images/themethumbs/themenail_cupertino.png" alt="image" width="25" height="22" />
+                </a>
+                <a href="Themes/le-frog/jquery-ui-1.10.4.custom.min.css" title="le-frog">
+                    <img src="images/themethumbs/le-frog.png" alt="image" width="25" height="22" />
+                </a>
+                <a href="Themes/swanky-purse/jquery-ui-1.10.4.custom.min.css" title="swanky-purse">
+                    <img src="images/themethumbs/swanky-purse.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/trontastic/jquery-ui-1.10.4.custom.min.css" title="trontastic">
+                    <img src="images/themethumbs/trontastic.png" alt="image" width="25" height="22" />
+                </a>
+
+                <a href="Themes/ui-lightness/jquery-ui-1.10.4.custom.min.css" title="lightness">
+                    <img src="images/themethumbs/lightness.png" alt="image" width="25" height="22" />
+                </a>
+            </div>
+        </div>
+
+
+    <br />
+    <div id="tree">
+
+    </div>
+    </div>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

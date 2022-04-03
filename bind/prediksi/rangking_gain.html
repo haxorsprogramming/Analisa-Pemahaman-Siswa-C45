@@ -1,0 +1,21 @@
+<h5>Rangking Gain</h5>
+<table id="tblPemahaman" class="table table-bordered table-hover table-striped" style="width: 100%; font-size: smaller">
+  <thead style="border-top: 1px solid #d0d0d0">
+    <tr>
+      <th>#</th>
+      <th>Nama Kriteria</th>
+      <th>Gain</th>
+      <th>Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for gain in dGain %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ gain.nama }}</td>
+      <td>{{ gain.nilai }}</td>
+      <td>{{ gain.ranking }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
